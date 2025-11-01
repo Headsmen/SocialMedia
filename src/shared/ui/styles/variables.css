@@ -1,0 +1,27 @@
+/* Design tokens - цвета, размеры, шрифты */
+:root {
+  /* Цвета */
+  --color-primary: #646cff;
+  --color-primary-hover: #535bf2;
+  --color-background: #242424;
+  --color-text: rgba(255, 255, 255, 0.87);
+  --color-text-secondary: rgba(255, 255, 255, 0.6);
+
+  /* Размеры */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+
+  /* Шрифты */
+  --font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+
+  /* Прочее */
+  --border-radius: 8px;
+  --transition-speed: 0.3s;
+}

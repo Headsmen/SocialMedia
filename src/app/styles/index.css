@@ -1,0 +1,4 @@
+/* Точка входа для всех стилей приложения */
+@import '../../shared/ui/styles/variables.css';
+@import '../../shared/ui/styles/reset.css';
+@import './global.css';
