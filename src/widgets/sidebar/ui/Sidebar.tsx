@@ -1,5 +1,6 @@
 import { IconUsers, IconMessage, IconMusic } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
 import styles from "./Sidebar.module.scss";
 
 interface SidebarProps {
@@ -8,6 +9,22 @@ interface SidebarProps {
 
 export const Sidebar = ({ withHeader = true }: SidebarProps) => {
   const location = useLocation();
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      const headerHeight = 73;
+
+      const progress = Math.min(scrollTop / headerHeight, 1);
+      setScrollProgress(progress);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    // Вызываем сразу для начального состояния
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const menuItems = [
     {
@@ -27,8 +44,21 @@ export const Sidebar = ({ withHeader = true }: SidebarProps) => {
     },
   ];
 
+  const sidebarTop = 73 - scrollProgress * 73;
+  const sidebarHeight = `calc(100vh - ${73 - scrollProgress * 73}px)`;
+
+  // Вычисляем прозрачность границы: от 0.1 до 1
+  const borderOpacity = 0.1 + scrollProgress * 0.9;
+
   return (
-    <aside className={`${styles.sidebar} ${!withHeader ? styles.fullHeight : ""}`}>
+    <aside
+      className={`${styles.sidebar} ${!withHeader ? styles.fullHeight : ""}`}
+      style={{
+        top: `${sidebarTop}px`,
+        height: sidebarHeight,
+        borderRightColor: `rgba(137, 137, 137, ${borderOpacity})`,
+      }}
+    >
       <nav className={styles.nav}>
         {menuItems.map((item) => {
           const Icon = item.icon;
