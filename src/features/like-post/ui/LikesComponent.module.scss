@@ -1,0 +1,15 @@
+.likeButton {
+  padding: 0;
+  color: #fff;
+  // height: auto !important;
+  // min-height: auto !important;
+}
+
+.likeButton:hover {
+  color: rgb(0, 106, 255);
+  background: none;
+}
+
+.likeButton.like {
+  color: black;
+}

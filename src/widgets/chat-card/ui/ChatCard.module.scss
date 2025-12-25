@@ -1,0 +1,14 @@
+.chatCard {
+  background-color: var(--mantine-color-dark-6);
+  transition: all 0.2s ease;
+  margin-bottom: 8px;
+
+  &:hover {
+    background-color: var(--mantine-color-dark-5);
+    transform: translateX(4px);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}

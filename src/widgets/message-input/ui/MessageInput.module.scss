@@ -1,0 +1,27 @@
+.container {
+  padding: 12px 16px;
+  background-color: var(--mantine-color-white);
+  border-top: 1px solid var(--mantine-color-gray-3);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--mantine-color-dark-7);
+    border-top-color: var(--mantine-color-dark-5);
+  }
+}
+
+.inputGroup {
+  width: 100%;
+}
+
+.textarea {
+  flex: 1;
+
+  textarea {
+    resize: none;
+  }
+}
+
+.sendButton {
+  flex-shrink: 0;
+  margin-bottom: 4px;
+}

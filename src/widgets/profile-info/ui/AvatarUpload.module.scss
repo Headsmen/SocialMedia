@@ -1,0 +1,19 @@
+.avatarContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.overlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.overlayContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}

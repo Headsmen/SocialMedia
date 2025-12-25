@@ -1,0 +1,67 @@
+.card {
+  background-color: var(--mantine-color-dark-6);
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.likeButton {
+  transition: all 0.2s ease;
+  position: relative;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &.liked {
+    animation: heartBeat 0.3s ease;
+  }
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.3);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  75% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.heartIcon {
+  color: var(--mantine-color-gray-5);
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--mantine-color-red-4);
+  }
+}
+
+.heartIconLiked {
+  color: var(--mantine-color-red-6);
+  fill: var(--mantine-color-red-6);
+  transition: all 0.2s ease;
+}
+
+.likeCount {
+  transition: all 0.2s ease;
+
+  &.liked {
+    color: var(--mantine-color-red-6);
+    font-weight: 600;
+  }
+}

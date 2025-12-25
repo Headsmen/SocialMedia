@@ -1,0 +1,28 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 80px);
+  max-height: calc(100vh - 80px);
+}
+
+.header {
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+  background-color: var(--mantine-color-white);
+
+  @media (prefers-color-scheme: dark) {
+    background-color: var(--mantine-color-dark-7);
+    border-bottom-color: var(--mantine-color-dark-5);
+  }
+}
+
+.messagesContainer {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.inputContainer {
+  flex-shrink: 0;
+}
