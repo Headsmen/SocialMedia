@@ -1,5 +1,5 @@
 import { IconPlus } from "@tabler/icons-react";
-import { useFabBtn } from "./useFabBtn";
+import { useFabBtn } from "../model/useFabBtn";
 import styles from "./FabBtn.module.scss";
 
 export const FabBtn = () => {

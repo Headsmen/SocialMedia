@@ -1,6 +1,6 @@
-import { Header } from "@/widgets/layout/header/Header";
-import { Sidebar } from "@/widgets/layout/sidebar/Sidebar";
-import { FabBtn } from "@/widgets/layout/fab-btn/FabBtn";
+import { Header } from "@/widgets/header";
+import { Sidebar } from "@/widgets/sidebar";
+import { FabBtn } from "@/widgets/fab-btn";
 import { NewsWidget } from "@/widgets/news-feed";
 
 export function NewsPageAutoScroll() {

@@ -1,36 +1,34 @@
-import { formatDistanceToNow } from 'date-fns';
-import { ru } from 'date-fns/locale';
+export function formatRelativeTime(timestamp: string): string {
+  const now = new Date();
+  const date = new Date(timestamp);
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
 
-/**
- * Форматирует дату в относительное время ("5 минут назад")
- */
-export const formatRelativeTime = (date: string | Date): string => {
-  return formatDistanceToNow(new Date(date), {
-    addSuffix: true,
-    locale: ru,
-  });
-};
-
-/**
- * Форматирует дату в локализованный формат
- */
-export const formatDate = (date: string | Date, format?: string): string => {
-  const dateObj = new Date(date);
-
-  if (format === 'short') {
-    return dateObj.toLocaleDateString('ru-RU', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    });
+  if (diffInSeconds < 60) {
+    return 'только что';
   }
 
-  if (format === 'time') {
-    return dateObj.toLocaleTimeString('ru-RU', {
-      hour: '2-digit',
-      minute: '2-digit',
-    });
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  if (diffInMinutes < 60) {
+    return `${diffInMinutes} мин. назад`;
   }
 
-  return dateObj.toLocaleString('ru-RU');
-};
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  if (diffInHours < 24) {
+    return `${diffInHours} ч. назад`;
+  }
+
+  const diffInDays = Math.floor(diffInHours / 24);
+  if (diffInDays < 7) {
+    return `${diffInDays} д. назад`;
+  }
+
+  return formatDate(timestamp);
+}
+
+export function formatDate(timestamp: string): string {
+  const date = new Date(timestamp);
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+  return `${day}.${month}.${year}`;
+}

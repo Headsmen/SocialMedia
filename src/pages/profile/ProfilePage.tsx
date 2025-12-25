@@ -1,8 +1,8 @@
 import { Container } from '@mantine/core';
 import { useParams } from 'react-router-dom';
 import { ProfileWidgets } from '@/widgets/profile-info';
-import { Header } from "@/widgets/layout/header/Header";
-import { Sidebar } from "@/widgets/layout/sidebar/Sidebar";
+import { Header } from "@/widgets/header";
+import { Sidebar } from "@/widgets/sidebar";
 
 function ProfilePage() {
   const { userEmail } = useParams<{ userEmail?: string }>();

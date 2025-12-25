@@ -1,7 +1,7 @@
 import { IconBell, IconUser, IconLogout2 } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 import { Badge } from "@mantine/core";
-import { useHeaderActions } from "./model/useHeaderActions";
+import { useHeaderActions } from "../model/useHeaderActions";
 import styles from "./Header.module.scss";
 
 export const Header = () => {

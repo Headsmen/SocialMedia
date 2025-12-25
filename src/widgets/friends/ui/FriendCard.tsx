@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import styles from "./FriendsAddForm.module.scss";
+import { Avatar, ActionIcon, Group, Stack, Text } from "@mantine/core";
 import { IconMessage } from "@tabler/icons-react";
-import { Avatar, IconButton, UserInfo } from "@/shared/ui";
+import styles from "./FriendsAddForm.module.scss";
 
 interface FriendCardProps {
   friendEmail: string;
@@ -29,35 +29,37 @@ export const FriendCard: React.FC<FriendCardProps> = ({
 
   return (
     <div className={`${styles.friendRequestForm} ${className}`}>
-      <div className={styles.header}>
-        <Avatar
-          src={friendAvatar}
-          alt={friendName}
-          fallbackName={friendName}
-          size="md"
-          onClick={handleProfileClick}
-          className={styles.avatar}
-        />
-
-        <div className={styles.addFriendInfo}>
-          <UserInfo
-            name={friendName}
-            subtitle={friendEmail}
+      <Group justify="space-between" className={styles.header}>
+        <Group gap="sm">
+          <Avatar
+            src={friendAvatar}
+            alt={friendName}
+            radius="xl"
             size="md"
             onClick={handleProfileClick}
+            style={{ cursor: 'pointer' }}
           />
-        </div>
 
-        <div className={styles.actions}>
-          <IconButton
-            icon={<IconMessage />}
-            onClick={handleChatClick}
-            variant="success"
-            size="md"
-            title="Написать сообщение"
-          />
-        </div>
-      </div>
+          <Stack gap={4} onClick={handleProfileClick} style={{ cursor: 'pointer' }}>
+            <Text size="sm" fw={500}>
+              {friendName}
+            </Text>
+            <Text size="xs" c="dimmed">
+              {friendEmail}
+            </Text>
+          </Stack>
+        </Group>
+
+        <ActionIcon
+          color="blue"
+          variant="filled"
+          onClick={handleChatClick}
+          title="Написать сообщение"
+          size="lg"
+        >
+          <IconMessage size={18} />
+        </ActionIcon>
+      </Group>
     </div>
   );
 };

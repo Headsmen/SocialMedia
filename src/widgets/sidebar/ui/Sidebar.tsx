@@ -1,6 +1,6 @@
 import { IconUsers, IconMessage, IconMusic } from "@tabler/icons-react";
 import { Link, useLocation } from "react-router-dom";
-import { useSidebarScroll } from "./model/useSidebarScroll";
+import { useSidebarScroll } from "../model/useSidebarScroll";
 import styles from "./Sidebar.module.scss";
 
 interface SidebarProps {

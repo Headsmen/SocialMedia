@@ -1,5 +1,5 @@
-import { Header } from "@/widgets/layout/header/Header";
-import { Sidebar } from "@/widgets/layout/sidebar/Sidebar";
+import { Header } from "@/widgets/header";
+import { Sidebar } from "@/widgets/sidebar";
 import { ChatWidget } from "@/widgets/chat";
 
 export function ChatPage() {
