@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { commentApi } from '@/shared/api';
-import { commentKeys } from './commentKeys';
+import { commentKeys } from '../config/commentKeys';
 
 const COMMENTS_PER_PAGE = 10;
 const STALE_TIME = 5 * 60 * 1000;

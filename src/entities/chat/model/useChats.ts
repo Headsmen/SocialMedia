@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { chatApi } from '../api/chatApi';
-import { chatKeys } from './chatKeys';
+import { chatKeys } from '../config/chatKeys';
 
 export const useChats = () => {
   return useQuery({

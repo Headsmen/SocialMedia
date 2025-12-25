@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { usersApi, type User } from '../api/users-api';
-import { userKeys } from '../model/userKeys';
+import { userKeys } from '../config/userKeys';
 
 export const useUsers = () => {
   return useQuery<User[], Error>({

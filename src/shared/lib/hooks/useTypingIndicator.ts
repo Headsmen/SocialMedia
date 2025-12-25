@@ -8,7 +8,7 @@ interface UseTypingIndicatorProps {
 }
 
 export const useTypingIndicator = ({ chatId, currentUserId }: UseTypingIndicatorProps) => {
-  const typingTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const typingTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleTypingStart = () => {
     if (!chatId || !currentUserId) return;

@@ -1,6 +1,6 @@
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 import { chatApi } from '../api/chatApi';
-import { chatKeys } from './chatKeys';
+import { chatKeys } from '../config/chatKeys';
 import type { Message } from './types';
 
 export const useMessages = (chatId: string) => {

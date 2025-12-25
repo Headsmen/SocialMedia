@@ -1,7 +1,7 @@
 // src/entities/user/hooks/useFriendRequests.ts
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { usersApi } from '../api/users-api';
-import { userKeys } from '../model/userKeys';
+import { userKeys } from '../config/userKeys';
 
 export const useSendFriendRequest = () => {
   const queryClient = useQueryClient();

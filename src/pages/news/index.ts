@@ -1,1 +1,1 @@
-export { NewsPageAutoScroll } from './ui/NewsPageAutoScroll';
+export { NewsPageAutoScroll } from './NewsPageAutoScroll';

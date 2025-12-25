@@ -1,6 +1,5 @@
-import { LoginWidget } from "@/widgets/auth-login";
-import { RegisterWidget } from "@/widgets/auth-register";
-import { useAuthPage } from "./model/useAuthPage";
+import { LoginWidget, RegisterWidget } from "@/widgets/auth";
+import { useAuthPage } from "./useAuthPage";
 
 export function AuthPage() {
   const { isLogin, toggleMode } = useAuthPage();

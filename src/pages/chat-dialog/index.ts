@@ -1,1 +1,1 @@
-export { ChatDialogPage } from './ui/ChatDialogPage';
+export { ChatDialogPage } from './ChatDialogPage';

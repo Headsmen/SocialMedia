@@ -1,21 +1,19 @@
 import { create } from "zustand";
 
-interface LikeState {
+export interface LikeState {
   userLikes: Record<string, boolean>;
   likeCounts: Record<string, number>;
   toggleLike: (postId: string) => void;
-  isLiked: (postId: string) => boolean;
-  getLikeCount: (postId: string) => number;
 }
 
-export const useLikeStore = create<LikeState>((set, get) => ({
+export const useLikeStore = create<LikeState>((set) => ({
   userLikes: {},
   likeCounts: {},
-  
+
   toggleLike: (postId: string) => set((state) => {
     const isCurrentlyLiked = state.userLikes[postId] || false;
     const currentCount = state.likeCounts[postId] || 0;
-    
+
     return {
       userLikes: {
         ...state.userLikes,
@@ -27,8 +25,4 @@ export const useLikeStore = create<LikeState>((set, get) => ({
       }
     };
   }),
-  
-  isLiked: (postId: string) => get().userLikes[postId] || false,
-  
-  getLikeCount: (postId: string) => get().likeCounts[postId] || 0
 }));

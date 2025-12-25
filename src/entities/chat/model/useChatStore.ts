@@ -1,10 +1,5 @@
 import { create } from 'zustand';
 
-interface TypingUser {
-  userId: string;
-  chatId: string;
-}
-
 interface ChatStore {
   onlineUsers: Set<string>;
   setOnlineUsers: (userIds: string[]) => void;

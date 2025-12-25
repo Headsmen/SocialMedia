@@ -1,4 +1,4 @@
-import { PostsList } from "@/widgets/posts-list";
+import { PostsList } from "@/widgets/post";
 import styles from "./NewsWidget.module.scss";
 
 export function NewsWidget() {

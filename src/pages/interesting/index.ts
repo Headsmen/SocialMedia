@@ -1,1 +1,1 @@
-export { InterestingPage } from './ui/InterestingPage'
+export { InterestingPage } from './InterestingPage';

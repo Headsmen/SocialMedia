@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { chatApi } from '../api/chatApi';
-import { chatKeys } from './chatKeys';
+import { chatKeys } from '../config/chatKeys';
 import { websocketManager } from '@/shared/api/websocket/websocketManager';
 import { SocketEvents } from '@/shared/api/websocket/config/events';
 
@@ -9,7 +9,7 @@ export const useSendMessage = () => {
 
   return useMutation({
     mutationFn: chatApi.sendMessage,
-    onSuccess: (data, variables) => {
+    onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: chatKeys.messages(variables.chatId) });
       queryClient.invalidateQueries({ queryKey: chatKeys.lists() });
     },

@@ -1,31 +1,26 @@
 import { Textarea, Button, Group, Stack } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { useFormik } from 'formik';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { modals } from '@mantine/modals';
 import { ImageUpload } from '@/shared/ui/ImageUpload';
+import { postSchema } from '@/shared/lib/validators';
 import type { PostFormProps } from '../model/types';
 
 export function PostForm({ initialData, onSubmit, mode = 'create' }: PostFormProps) {
-  const form = useForm({
+  const formik = useFormik({
     initialValues: initialData || {
       content: '',
       imageUrl: '',
     },
-    validate: {
-      content: (value) => {
-        if (!value?.trim()) return 'Содержимое поста не может быть пустым';
-        if (value.length > 1000) return 'Максимальная длина поста - 1000 символов';
-        return null;
-      },
+    validationSchema: toFormikValidationSchema(postSchema),
+    onSubmit: async (values) => {
+      await onSubmit(values);
+      modals.closeAll();
     },
   });
 
-  const handleSubmit = async (values: typeof form.values) => {
-    await onSubmit(values);
-    modals.closeAll();
-  };
-
   return (
-    <form onSubmit={form.onSubmit(handleSubmit)}>
+    <form onSubmit={formik.handleSubmit}>
       <Stack gap="md">
         <Textarea
           label="Содержимое поста"
@@ -33,13 +28,17 @@ export function PostForm({ initialData, onSubmit, mode = 'create' }: PostFormPro
           required
           minRows={4}
           maxRows={8}
-          {...form.getInputProps('content')}
+          name="content"
+          value={formik.values.content}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.content && formik.errors.content ? formik.errors.content : undefined}
         />
 
         <ImageUpload
-          value={form.values.imageUrl}
-          onChange={(value) => form.setFieldValue('imageUrl', value || '')}
-          error={form.errors.imageUrl as string}
+          value={formik.values.imageUrl}
+          onChange={(value) => formik.setFieldValue('imageUrl', value || '')}
+          error={formik.touched.imageUrl && formik.errors.imageUrl ? formik.errors.imageUrl : undefined}
         />
 
         <Group justify="flex-end" mt="md">

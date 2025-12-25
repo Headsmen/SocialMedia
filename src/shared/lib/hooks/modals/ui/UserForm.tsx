@@ -1,38 +1,44 @@
 import { TextInput, Button, Group, Stack } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { useFormik } from 'formik';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { modals } from '@mantine/modals';
+import { userSchema } from '@/shared/lib/validators';
 import type { UserFormProps } from '../model/types';
 
 export function UserForm({ initialData, onSubmit, mode = 'edit' }: UserFormProps) {
-  const form = useForm({
+  const formik = useFormik({
     initialValues: initialData || {
       firstName: '',
       lastName: '',
     },
-    validate: {
-      firstName: (value) => (!value?.trim() ? 'Имя обязательно' : null),
-      lastName: (value) => (!value?.trim() ? 'Фамилия обязательна' : null),
+    validationSchema: toFormikValidationSchema(userSchema),
+    onSubmit: async (values) => {
+      await onSubmit(values);
+      modals.closeAll();
     },
   });
 
-  const handleSubmit = async (values: typeof form.values) => {
-    await onSubmit(values);
-    modals.closeAll();
-  };
-
   return (
-    <form onSubmit={form.onSubmit(handleSubmit)}>
+    <form onSubmit={formik.handleSubmit}>
       <Stack>
         <TextInput
           label="Имя"
           placeholder="Введите имя"
-          {...form.getInputProps('firstName')}
+          name="firstName"
+          value={formik.values.firstName}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.firstName && formik.errors.firstName ? formik.errors.firstName : undefined}
           required
         />
         <TextInput
           label="Фамилия"
           placeholder="Введите фамилию"
-          {...form.getInputProps('lastName')}
+          name="lastName"
+          value={formik.values.lastName}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.lastName && formik.errors.lastName ? formik.errors.lastName : undefined}
           required
         />
         <Group justify="flex-end" mt="md">
