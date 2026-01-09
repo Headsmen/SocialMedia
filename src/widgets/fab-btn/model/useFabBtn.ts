@@ -1,4 +1,4 @@
-import { useModals, type PostFormData } from '@/shared/lib/hooks/useModals';
+import { useModals, type PostFormData } from '@/shared/lib/hooks/modals';
 import { useCreatePost } from '@/entities/post';
 import { useAuthStore } from '@/entities/user';
 import { notifications } from '@mantine/notifications';

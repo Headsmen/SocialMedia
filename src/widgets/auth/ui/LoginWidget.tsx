@@ -1,13 +1,15 @@
-import { Button, Box, Stack, Title, Anchor, TextInput, PasswordInput } from "@mantine/core";
+import { Box, Title, Anchor, TextInput, PasswordInput } from "@mantine/core";
 import { NotificationFactory } from "@/shared/ui/factories/notification-factory";
-import { useLoginForm } from "../model/useLoginForm";
+import { Form } from "@/shared/ui/Form";
+import { loginSchema } from "@/shared/lib/validators";
+import { useLogin } from "@/entities/user";
 
 interface LoginWidgetProps {
   onToggleMode: () => void;
 }
 
 export function LoginWidget({ onToggleMode }: LoginWidgetProps) {
-  const { formik, isLoading, isError, error, reset } = useLoginForm();
+  const loginMutation = useLogin();
 
   return (
     <Box maw={400} mt="150" mx="auto" p="md">
@@ -15,45 +17,54 @@ export function LoginWidget({ onToggleMode }: LoginWidgetProps) {
         Вход в систему
       </Title>
 
-      {isError &&
+      {loginMutation.isError &&
         NotificationFactory.createError({
           title: "Ошибка входа",
-          message: error?.message || "Произошла ошибка при входе",
-          onClose: reset,
+          message: loginMutation.error?.message || "Произошла ошибка при входе",
+          onClose: loginMutation.reset,
         })}
 
-      <form onSubmit={formik.handleSubmit}>
-        <Stack>
-          <TextInput
-            label="Email"
-            placeholder="Введите email"
-            type="email"
-            name="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.email && formik.errors.email ? formik.errors.email : undefined}
-          />
+      <Form
+        initialValues={{
+          email: "",
+          password: "",
+        }}
+        validationSchema={loginSchema}
+        onSubmit={(values) => {
+          loginMutation.mutate(values);
+        }}
+        submitText="Войти"
+        showCancelButton={false}
+      >
+        {(formik) => (
+          <>
+            <TextInput
+              label="Email"
+              placeholder="Введите email"
+              type="email"
+              name="email"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.email && formik.errors.email ? formik.errors.email : undefined}
+            />
 
-          <PasswordInput
-            label="Пароль"
-            placeholder="Введите пароль"
-            name="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            error={formik.touched.password && formik.errors.password ? formik.errors.password : undefined}
-          />
+            <PasswordInput
+              label="Пароль"
+              placeholder="Введите пароль"
+              name="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              error={formik.touched.password && formik.errors.password ? formik.errors.password : undefined}
+            />
 
-          <Button type="submit" loading={isLoading} fullWidth size="md">
-            Войти
-          </Button>
-
-          <Anchor onClick={onToggleMode} ta="center" size="sm">
-            Нет аккаунта? Зарегистрируйтесь
-          </Anchor>
-        </Stack>
-      </form>
+            <Anchor onClick={onToggleMode} ta="center" size="sm">
+              Нет аккаунта? Зарегистрируйтесь
+            </Anchor>
+          </>
+        )}
+      </Form>
     </Box>
   );
 }

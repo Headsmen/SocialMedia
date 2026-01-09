@@ -1,7 +1,7 @@
 import { Group, Text, rem, Image, CloseButton, Stack } from '@mantine/core';
-import { Dropzone, IMAGE_MIME_TYPE, type FileWithPath } from '@mantine/dropzone';
+import { Dropzone, IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { IconUpload, IconPhoto, IconX } from '@tabler/icons-react';
-import { useState } from 'react';
+import { useImageUpload } from './model/useImageUpload';
 
 interface ImageUploadProps {
   value?: string;
@@ -10,34 +10,7 @@ interface ImageUploadProps {
 }
 
 export function ImageUpload({ value, onChange, error }: ImageUploadProps) {
-  const [loading, setLoading] = useState(false);
-
-  const handleDrop = async (files: FileWithPath[]) => {
-    if (files.length === 0) return;
-
-    const file = files[0];
-    setLoading(true);
-
-    try {
-      // Конвертируем файл в base64
-      const reader = new FileReader();
-      reader.onload = () => {
-        const base64 = reader.result as string;
-        onChange(base64);
-        setLoading(false);
-      };
-      reader.onerror = () => {
-        setLoading(false);
-      };
-      reader.readAsDataURL(file);
-    } catch (err) {
-      setLoading(false);
-    }
-  };
-
-  const handleRemove = () => {
-    onChange(null);
-  };
+  const { loading, handleDrop, handleRemove } = useImageUpload({ onChange });
 
   if (value) {
     return (

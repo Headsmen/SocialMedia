@@ -1,0 +1,16 @@
+.table {
+  width: 100%;
+
+  thead {
+    background-color: var(--mantine-color-dark-6);
+  }
+
+  th {
+    font-weight: 600;
+    user-select: none;
+  }
+
+  tbody tr {
+    transition: background-color 0.2s ease;
+  }
+}

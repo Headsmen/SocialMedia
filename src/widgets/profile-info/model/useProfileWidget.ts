@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore, useUserByEmail, useUpdateUserName, useUpdateAvatar } from '@/entities/user';
 import { notifications } from '@mantine/notifications';
-import { useModals } from '@/shared/lib/hooks/useModals';
+import { useModals } from '@/shared/lib/hooks/modals';
 
 interface UseProfileWidgetProps {
   userEmail?: string;
